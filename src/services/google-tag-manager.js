@@ -47,47 +47,47 @@ exports.addGoogleTagManager = ({ trackingId, dataLayerName }, environmentParamSt
 }
 
 exports.initializeGoogleTagManager = (options) => {
-  // console.log('initing tag manager');
-  // if (
-  //   !window.gatsbyPluginGDPRCookiesGoogleTagManagerInitialized &&
-  //   getCookie(options.cookieName) === `true` &&
-  //   validGTMTrackingId(options)
-  // ) {
-  //   window.dataLayer = window.dataLayer || [];
-  //   window.gtag = function(){window.dataLayer.push(arguments);}
-  //   window.gtag('js', new Date())
-  //
-  //   let gaAnonymize = options.anonymize
-  //   let gaAllowAdFeatures = options.allowAdFeatures
-  //   gaAnonymize = gaAnonymize !== undefined ? gaAnonymize : true
-  //   gaAllowAdFeatures = gaAllowAdFeatures !== undefined ? gaAllowAdFeatures : true
-  //
-  //   window.gtag('config', options.trackingId, {
-  //     'anonymize_ip': gaAnonymize,
-  //     'allow_google_signals': gaAllowAdFeatures
-  //   })
-  // }
+   console.log('initing tag manager');
+   if (
+     !window.gatsbyPluginGDPRCookiesGoogleTagManagerInitialized &&
+     getCookie(options.cookieName) === `true` &&
+     validGTMTrackingId(options)
+   ) {
+     window.dataLayer = window.dataLayer || [];
+     window.gtag = function(){window.dataLayer.push(arguments);}
+     window.gtag('js', new Date())
+  
+     let gaAnonymize = options.anonymize
+     let gaAllowAdFeatures = options.allowAdFeatures
+     gaAnonymize = gaAnonymize !== undefined ? gaAnonymize : true
+     gaAllowAdFeatures = gaAllowAdFeatures !== undefined ? gaAllowAdFeatures : true
+  
+     window.gtag('config', options.trackingId, {
+       'anonymize_ip': gaAnonymize,
+       'allow_google_signals': gaAllowAdFeatures
+     })
+   }
 }
 
 exports.trackGoogleTagManager = (options, location) => {
-  // console.log('tracking tag manager');
-  // if (
-  //   getCookie(options.cookieName) === `true` &&
-  //   validGTMTrackingId(options) &&
-  //   typeof window.gtag === "function"
-  // ) {
-  //   const pagePath = location ? location.pathname + location.search + location.hash : undefined
-  //   window.gtag(`event`, `page_view`, { page_path: pagePath })
-  // }
+   console.log('tracking tag manager');
+   if (
+     getCookie(options.cookieName) === `true` &&
+     validGTMTrackingId(options) &&
+     typeof window.gtag === "function"
+   ) {
+     const pagePath = location ? location.pathname + location.search + location.hash : undefined
+     window.gtag(`event`, `page_view`, { page_path: pagePath })
+   }
 
-  // setTimeout(() => {
-  //   const data = options.dataLayerName
-  //     ? window[options.dataLayerName]
-  //     : window.dataLayer
-  //
-  //   if (typeof data === `object`) {
-  //     const eventName = options.routeChangeEvent || `gatsbyRouteChange`
-  //     data.push({ event: eventName })
-  //   }
-  // }, 50)
+   setTimeout(() => {
+     const data = options.dataLayerName
+       ? window[options.dataLayerName]
+       : window.dataLayer
+  
+     if (typeof data === `object`) {
+       const eventName = options.routeChangeEvent || `gatsbyRouteChange`
+       data.push({ event: eventName })
+     }
+   }, 50)
 }
